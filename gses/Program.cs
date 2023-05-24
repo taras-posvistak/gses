@@ -10,9 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+var appTitle = "GSES2 BTC application";
 builder.Services.AddSwaggerGen(o => {
 	o.SwaggerDoc("Gses", new OpenApiInfo {
-		Title = "GSES2 BTC application",
+		Title = appTitle,
 		Version = "1.0.0"
 	});
 
@@ -26,20 +27,25 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger(c => {
-		c.RouteTemplate = "/swagger/{documentname}/swagger.json";
-		c.PreSerializeFilters.Add((swagger, httpReq) => {
-			swagger.Servers = new List<OpenApiServer> { new() { Url = $"http://{httpReq.Host.Value}" } };
-		});
-	});
-
-	app.UseSwaggerUI(c => {
-		c.SwaggerEndpoint("/swagger/Gses/swagger.json", "Gses");
-	});
+	app.UseDeveloperExceptionPage();
 }
+
+const string basePath = "/api";
+app.UsePathBase(basePath);
+
+// Configure the HTTP request pipeline.
+app.UseSwagger(c => {
+	c.RouteTemplate = "/swagger/{documentname}/swagger.json";
+	c.PreSerializeFilters.Add((swagger, httpReq) => {
+		swagger.Servers = new List<OpenApiServer> { new() { Url = $"http://{httpReq.Host.Value}{basePath}" } };
+	});
+});
+
+app.UseSwaggerUI(c => {
+	c.SwaggerEndpoint("/swagger/Gses/swagger.json", appTitle);
+});
 
 app.UseHttpsRedirection();
 

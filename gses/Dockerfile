@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["GSES2 BTC application/GSES2 BTC application.csproj", "GSES2 BTC application/"]
-RUN dotnet restore "GSES2 BTC application/GSES2 BTC application.csproj"
+COPY ["gses/Gses.csproj", "gses/"]
+RUN dotnet restore "gses/Gses.csproj"
 COPY . .
-WORKDIR "/src/GSES2 BTC application"
-RUN dotnet build "GSES2 BTC application.csproj" -c Release -o /app/build
+WORKDIR "/src/gses"
+RUN dotnet build "Gses.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GSES2 BTC application.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Gses.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GSES2 BTC application.dll"]
+ENTRYPOINT ["dotnet", "Gses.dll"]
