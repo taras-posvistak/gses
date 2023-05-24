@@ -4,10 +4,23 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>GSES2_BTC_application</RootNamespace>
+    <RootNamespace>Gses</RootNamespace>
     <UserSecretsId>06f2e85d-096a-4dc5-a9d3-2502f6a1b98f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	  <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Rate\Model\**" />
+    <Compile Remove="Services\Subscription\Model\**" />
+    <Content Remove="Services\Rate\Model\**" />
+    <Content Remove="Services\Subscription\Model\**" />
+    <EmbeddedResource Remove="Services\Rate\Model\**" />
+    <EmbeddedResource Remove="Services\Subscription\Model\**" />
+    <None Remove="Services\Rate\Model\**" />
+    <None Remove="Services\Subscription\Model\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
