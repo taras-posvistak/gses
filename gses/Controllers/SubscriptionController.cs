@@ -3,8 +3,8 @@ using Gses.Services.Subscription.ServiceLayer;
 
 namespace Gses.Controllers
 {
-	[Tags("subscription")]
 	[ApiController]
+	[Tags("subscription")]
 	public class SubscriptionController : Controller
 	{
 		private readonly ISubscriptionService _subscriptionService;

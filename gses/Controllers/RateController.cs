@@ -4,9 +4,9 @@ using Gses.Services.Rate.ServiceLayer;
 
 namespace Gses.Controllers
 {
-	[Tags("rate")]
 	[ApiController]
 	[Route("rate")]
+	[Tags("rate")]
 	[Produces(MediaTypeNames.Application.Json)]
 	public class RateController : Controller
 	{
