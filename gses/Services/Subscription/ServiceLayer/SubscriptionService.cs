@@ -2,6 +2,7 @@
 using Gses.Services.Mail.ServiceLayer;
 using Gses.Services.Rate.ServiceLayer;
 using Gses.Services.Subscription.DAL;
+using Gses.Services.Subscription.Model;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Gses.Services.Subscription.ServiceLayer
@@ -54,11 +55,8 @@ namespace Gses.Services.Subscription.ServiceLayer
 				return;
 			}
 
-			var dateNow = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
-			var subject = $"Актуальний курс BTC до UAH на {dateNow}";
-			var body = $"Актуальний курс BTC до UAH на {dateNow} становить <strong>{rate.Value}</strong>";
-
-			await _mailService.NotifyAsync(subject, body, emails, modelState);
+			var templateModel = new BtcToUahRateMailTemplateModel(rate.Value);
+			await _mailService.NotifyAsync("BtcToUahRate", templateModel, emails, modelState);
 		}
 
 		private bool validateEmail(string email)

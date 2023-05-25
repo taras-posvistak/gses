@@ -13,13 +13,9 @@
 
   <ItemGroup>
     <Compile Remove="Services\Rate\Model\**" />
-    <Compile Remove="Services\Subscription\Model\**" />
     <Content Remove="Services\Rate\Model\**" />
-    <Content Remove="Services\Subscription\Model\**" />
     <EmbeddedResource Remove="Services\Rate\Model\**" />
-    <EmbeddedResource Remove="Services\Subscription\Model\**" />
     <None Remove="Services\Rate\Model\**" />
-    <None Remove="Services\Subscription\Model\**" />
   </ItemGroup>
 
   <ItemGroup>

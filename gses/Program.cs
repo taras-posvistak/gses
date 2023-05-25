@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddRazorPages();
+builder.Services.AddDependencies();
+builder.Services.AddHttpClient();
 
 var appTitle = "GSES2 BTC application";
 builder.Services.AddSwaggerGen(o => {
@@ -21,9 +24,6 @@ builder.Services.AddSwaggerGen(o => {
 	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 	o.IncludeXmlComments(xmlPath);
 });
-
-builder.Services.AddDependencies();
-builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

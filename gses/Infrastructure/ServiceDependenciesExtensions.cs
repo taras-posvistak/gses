@@ -6,10 +6,11 @@ using Gses.Services.Subscription.ServiceLayer;
 
 namespace Gses.Infrastructure
 {
-    public static class ServiceDependenciesExtensions
+	public static class ServiceDependenciesExtensions
 	{
 		public static void AddDependencies(this IServiceCollection services)
 		{
+			services.AddScoped<IHtmlTemplateEngineerService, HtmlTemplateEngineerService>();
 			services.AddScoped<IMailService, MailService>();
 
 			services.AddScoped<ICoingeckoHttpClient, CoingeckoHttpClient>();

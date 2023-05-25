@@ -1,0 +1,19 @@
+﻿@model Gses.Services.Subscription.Model.BtcToUahRateMailTemplateModel
+
+@{
+    Layout = "_MailLayout.cshtml";
+}
+
+<style type="text/css">
+    .description {
+        font-size: 16px;
+        font-family: tahoma, verdana, segoe, sans-serif;
+        line-height: 24px;
+        color: #666666;
+    }
+</style>
+
+<p class="description">
+    Вітаємо!<br />
+    Станом на <strong>@Model.Date</strong> обмінний курс <strong>BTC до UAH</strong> становить <strong><span style="color: #FF8C00;">@Model.Rate</span></strong>
+</p>

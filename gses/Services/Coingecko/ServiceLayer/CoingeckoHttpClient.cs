@@ -6,7 +6,7 @@ namespace Gses.Services.Coingecko.ServiceLayer
 {
 	public interface ICoingeckoHttpClient
 	{
-		Task<HttpResponseEntityModel<BtcToUahApiModel>> GetBtcToUahActualRate();
+		Task<HttpResponseEntityModel<BtcToUahApiModel>> GetBtcToUahActualRateAsync();
 	}
 
 	public class CoingeckoHttpClient : ICoingeckoHttpClient
@@ -20,7 +20,7 @@ namespace Gses.Services.Coingecko.ServiceLayer
 			_httpClient.Timeout = TimeSpan.FromSeconds(20);
 		}
 
-		public async Task<HttpResponseEntityModel<BtcToUahApiModel>> GetBtcToUahActualRate()
+		public async Task<HttpResponseEntityModel<BtcToUahApiModel>> GetBtcToUahActualRateAsync()
 		{
 			var response = await _httpClient.GetAsync("simple/price?ids=bitcoin&vs_currencies=uah");
 			return await getResponseAsync<BtcToUahApiModel>(response);

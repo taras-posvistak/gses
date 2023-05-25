@@ -19,7 +19,7 @@ namespace Gses.Services.Rate.ServiceLayer
 
 		public async Task<decimal?> GetBtcToUahActualRateAsync(ModelStateDictionary modelState)
 		{
-			var response = await _coingeckoHttpClient.GetBtcToUahActualRate();
+			var response = await _coingeckoHttpClient.GetBtcToUahActualRateAsync();
 			if (!response.Success && !string.IsNullOrEmpty(response.Message))
 			{
 				modelState.AddModelError("Error", response.Message);
