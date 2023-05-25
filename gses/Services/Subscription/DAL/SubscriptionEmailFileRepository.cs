@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Gses.Services.Common.Tools;
+using System.Text;
 using System.Text.Json;
 
 namespace Gses.Services.Subscription.DAL
@@ -12,7 +13,7 @@ namespace Gses.Services.Subscription.DAL
 
 	public class SubscriptionEmailFileRepository : ISubscriptionEmailFileRepository
 	{
-		private const string _filePath = "Db/subscriptionEmails";
+		private const string _filePath = $"{FilePathConstant.FileDbFolder}/SubscriptionEmails.json";
 
 		public string[] GetAll()
 		{
@@ -33,11 +34,6 @@ namespace Gses.Services.Subscription.DAL
 
 		public bool Add(string email)
 		{
-			if (!File.Exists(_filePath))
-			{
-				using var fileStream = File.Create(_filePath);
-			}
-
 			var allEmails = new HashSet<string>(GetAll());
 			if (allEmails.Contains(email))
 			{
@@ -46,7 +42,14 @@ namespace Gses.Services.Subscription.DAL
 
 			allEmails.Add(email);
 
-			using var writer = new StreamWriter(_filePath);
+			var directoryPath = Path.GetDirectoryName(_filePath);
+			if (!Directory.Exists(directoryPath))
+			{
+				Directory.CreateDirectory(directoryPath);
+			}
+
+			using var fileStream = File.Open(_filePath, FileMode.OpenOrCreate);
+			using var writer = new StreamWriter(fileStream);
 			var json = JsonSerializer.Serialize(allEmails);
 			writer.WriteLine(json);
 

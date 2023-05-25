@@ -7,7 +7,5 @@
 		public int SmtpPort { get; set; }
 
 		public string? SmtpUserAddress { get; set; }
-
-		public string? SmtpUserPassword { get; set; }
 	}
 }

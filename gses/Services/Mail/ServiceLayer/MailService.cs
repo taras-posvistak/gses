@@ -37,7 +37,7 @@ namespace Gses.Services.Mail.ServiceLayer
 				Port = config.SmtpPort,
 				UseDefaultCredentials = false,
 				EnableSsl = true,
-				Credentials = new NetworkCredential(config.SmtpUserAddress, config.SmtpUserPassword)
+				Credentials = new NetworkCredential(config.SmtpUserAddress, _configuration["SMTP_USER_PASSWORD"])
 			};
 
 			try
