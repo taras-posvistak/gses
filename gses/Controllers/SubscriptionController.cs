@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Gses.Services.Subscription.ServiceLayer;
 
 namespace Gses.Controllers
@@ -17,12 +18,13 @@ namespace Gses.Controllers
 		/// <summary>
 		/// Підписати e-mail на отримання поточного курсу
 		/// </summary>
+		/// <param name="email">Електронна адреса, яку потрібно підписати</param>
 		/// <response code="200">E-mail додано</response>
 		/// <response code="409">E-mail вже є в базі даних</response>
 		[HttpPost("subscribe")]
 		[Consumes("application/x-www-form-urlencoded")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public IActionResult Subscribe([FromForm] string email)
+		public IActionResult Subscribe([FromForm, Required] string email)
 		{
 			var success = _subscriptionService.Subscribe(email, ModelState);
 			if (!ModelState.IsValid)
