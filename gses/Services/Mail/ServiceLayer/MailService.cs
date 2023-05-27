@@ -37,17 +37,18 @@ namespace Gses.Services.Mail.ServiceLayer
 			ModelStateDictionary? modelState = null)
 		{
 			var config = _configuration.GetSection("MailServer").Get<MailServerConfigModel>();
+			var smtpUserAddress = _configuration["SMTP_USER_ADDRESS"];
 
 			using var smtpClient = new SmtpClient {
 				Host = config.SmtpServer,
 				Port = config.SmtpPort,
 				UseDefaultCredentials = false,
 				EnableSsl = true,
-				Credentials = new NetworkCredential(config.SmtpUserAddress, _configuration["SMTP_USER_PASSWORD"])
+				Credentials = new NetworkCredential(smtpUserAddress, _configuration["SMTP_USER_PASSWORD"])
 			};
 
 			var mailContent = await getMailContent(templateName, templateModel);
-			using var message = new MailMessage(config.SmtpUserAddress, recipientEmail, mailContent.Subject, mailContent.Body) {
+			using var message = new MailMessage(smtpUserAddress, recipientEmail, mailContent.Subject, mailContent.Body) {
 				IsBodyHtml = true
 			};
 

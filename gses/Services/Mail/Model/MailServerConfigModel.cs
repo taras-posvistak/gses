@@ -5,7 +5,5 @@
 		public string? SmtpServer { get; set; }
 
 		public int SmtpPort { get; set; }
-
-		public string? SmtpUserAddress { get; set; }
 	}
 }
